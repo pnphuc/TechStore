@@ -43,4 +43,3 @@
 - UserInformationPage
   ![user](./overview/user.png)
 
-Author: Nguyễn Thái Hiệp
