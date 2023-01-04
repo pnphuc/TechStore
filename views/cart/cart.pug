@@ -1,0 +1,126 @@
+html
+    head 
+        meta(charset='UTF-8')
+        title TechStore | Cart
+        link(rel="stylesheet",
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css",
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T",
+        crossorigin="anonymous")
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href="/styles/product-styles.css")
+        link(rel="stylesheet", href="/styles/home-styles.css")
+        link(rel="stylesheet", href="/styles/cart.css")
+        link(rel="shortcut icon", type="image/x-icon", href="/images/logo.png")
+    body
+      nav.flex-div
+        a.nav-left(href='/')
+          img.logo-web(src='/images/logo.png', alt='')
+        .nav-middle.flex-div
+          form(action="/product/items/search", method='GET').search-box.flex-div
+            input(type='text', name='q', placeholder='Tìm kiếm sản phẩm')
+            button
+              img.search-icon(src='/images/search.svg.png', alt='')
+        .flex-div
+          span#username #{user.username}
+          a(href='/user/' + user.username)
+            img#avatar(src='/' + user.avatar)
+      .product 
+        .small-cart-container
+            .col-md-8
+            .product-details.mr-2
+              a.d-flex.flex-row.align-items-center(href='/product/items/' + user.username)
+                i.fa.fa-long-arrow-left
+                span.ml-2 Tiếp tục mua hàng
+                hr
+              h3#cart-title.mb-0 Giỏ hàng
+              .d-flex.justify-content-between
+              span Bạn có 
+              b #{size} 
+              span sản phẩm trong giỏ hàng
+              
+              .d-flex.flex-row.align-items-center
+              br
+              br
+                    //- span.text-black-50 Sắp xếp theo:
+                    //- .price.ml-2
+                    //- span.mr-1 giá
+                    //- i.fa.fa-angle-down
+            if products
+              each product in products 
+                .product-container
+                  img.product-image(src=product.image)
+                  h6.name-items=product.name
+                  span=`Số lượng: ${product.count}`
+                  br
+                  span=`Giá bán: ${product.price}đ`
+                  button(type='button')
+                    a.delete_button(href='/cart/delete/' + product.name) Xóa
+
+            .col-md-8
+            form(action="/cart/checkout", method='POST').payment-info
+              .d-flex.justify-content-between.align-items-center
+              span Chi tiết đơn hàng
+              span.type.d-block.mt-3.mb-1 Thông tin thẻ tín dụng
+              div
+              label.credit-card-label Tên thẻ tín dụng
+              input.form-control(name='payment',type='text')
+              div
+              label.credit-card-label Số tài khoản
+              input.form-control(name='stk',type='text')
+              div
+              label.credit-card-label Địa chỉ nhận hàng
+              input.form-control(name='address',type='text')
+              hr.line
+              .d-flex.justify-content-between.information
+              span Tổng:    #{total} đ
+              br
+              button Checkout
+
+    footer.site-footer
+      .container
+        .row
+          .col-sm-12.col-md-6
+            h6 Về Chúng Tôi
+            p.text-justify
+              | Nhóm 03 
+              i Môn Nhập Môn Công Nghệ Phầm Mềm Khóa 2020
+              |  Khóa học này là một trong những khóa học đầu tiên về kỹ thuật phần mềm. Khóa học này giới thiệu các khái niệm cơ bản, các nguyên tắc, thực hành, phương pháp và công cụ trong kỹ thuật phần mềm. Đây là Project Cuối Kì được Nhóm 3 chúng em thực hiện sau khóa học. Em xin cám ơn các Giảng Viên, Trợ Giảng đã giúp đỡ chúng em hoàn thành đồ án này.
+          .col-xs-6.col-md-3
+            h6 Thể Loại Sản Phẩm
+            ul.footer-links
+              li
+                a(href='#') Điện Thoại Thông Minh
+              li
+                a(href='#') Laptop
+              li
+                a(href='#') TiVi
+              li
+                a(href='#') Tủ Lạnh
+              li
+                a(href='#') Bàn Phím
+              li
+                a(href='#') Chuột
+          .col-xs-6.col-md-3
+            h6 Liên Hệ Với Chúng Tôi
+            ul.footer-links
+              li
+                a(href='#') Thông Tin Nhóm
+              li
+                a(href='#') Liên Hệ Facebook
+              li
+                a(href='#') Liên Hệ Instagram
+              li
+                a(href='#') Liên Hệ Github
+              li
+                a(href='#') Chính sách bảo mật
+              li
+                a(href='#') Sơ đồ trang web
+
+        hr
+      .container
+        .row
+          .col-md-8.col-sm-6.col-xs-12
+            p.copyright-text
+              | Copyright &copy; 2022 All Rights Reserved by Group 03
+
+          
